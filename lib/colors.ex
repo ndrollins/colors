@@ -155,7 +155,7 @@ defmodule Colors do
       {:right, server_r, color_r} -> 
         if color_r == hd(judge_colors) do
           if right_score + 1 == 2 do
-            send(user_server, [{:judge, self()}, "left score is #{left_score} and right score is #{right_score + 1}", {:left, left_colors}, {:right, right_colors}, {:judge, judge_colors}])
+            send(user_server, [{:judge, self()}, "left score is #{left_score} and right score is #{right_score + 1}", {:left, left_colors}, {:right, right_colors}, {:judge, judge_colors, :right_last_guess, hd(right_colors)}])
           else
             send(self(), {:guess_again, self()})
             judge_num(colors, user_server, left_server, right_server, judge_server, left_score, right_score + 1, left_colors, [color_r | right_colors], judge_colors)
